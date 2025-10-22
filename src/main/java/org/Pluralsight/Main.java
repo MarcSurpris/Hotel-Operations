@@ -15,7 +15,7 @@ public class Main {
         System.out.println("=======================================================================");
 
         // Test Reservation class
-        Reservation reservation = new Reservation("king", 3, 4, true, 1);
+        Reservation reservation = new Reservation("king", 300, 5, true, 1);
         System.out.println("Room Type: " + reservation.getRoomType());
         System.out.println("Price per Night: " + reservation.getPrice());
         System.out.println("Number of Nights: " + reservation.getNumberOfNights());
@@ -24,7 +24,7 @@ public class Main {
         System.out.println("=======================================================================");
 
         // Test Room class
-        Room room = new Room(2, 99.99, false, false, true);
+        Room room = new Room(3, 99.99, false, false, true);
         System.out.println("Number of Beds: " + room.getNumberOfBeds());
         System.out.println("Price: " + room.getPrice());
         System.out.println("Is Occupied: " + room.isOccupied());
