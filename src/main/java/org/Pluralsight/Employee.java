@@ -1,79 +1,105 @@
 package org.Pluralsight;
 
+import java.time.LocalDateTime;
+
 public class Employee {
-    private int getEmployeeId;
-    private String getName;
-    private int getDepartment;
-    private double getPayRate;
-    private double getTotalPay;
-    private int getRegularHours;
-    private int OvertimeHours;
+    private int employeeId;
+    private String name;
+    private String department;
+    private double payRate;
+    private double hoursWorked;
+    private double startTime;
 
-    public Employee(int getEmployeeId, String getName, int getDepartment, double getPayRate, double getTotalPay, int getRegularHours, int getOvertimeHours) {
-        this.getEmployeeId = getEmployeeId;
-        this.getName = getName;
-        this.getDepartment = getDepartment;
-        this.getPayRate = getPayRate;
-        this.getTotalPay = getTotalPay;
-        this.getRegularHours = getRegularHours;
-        this.OvertimeHours = getOvertimeHours;
-
+    public Employee(int employeeId, String name, String department, double payRate) {
+        this.employeeId = employeeId;
+        this.name = name;
+        this.department = department;
+        this.payRate = payRate;
+        this.hoursWorked = 0;
+        this.startTime = 0;
     }
 
     public int getEmployeeId() {
-        return getEmployeeId;
-    }
-
-
-    public void setGetEmployeeId(int getEmployeeId) {
-        this.getEmployeeId = getEmployeeId;
+        return employeeId;
     }
 
     public String getName() {
-        return getName;
+        return name;
     }
 
-    public void setGetName(String getName) {
-        this.getName = getName;
-    }
-
-    public int getDepartment() {
-        return getDepartment;
-    }
-
-    public void setGetDepartment(int getDepartment) {
-        this.getDepartment = getDepartment;
+    public String getDepartment() {
+        return department;
     }
 
     public double getPayRate() {
-        return getPayRate;
+        return  payRate;
     }
 
-    public void setGetPayRate(double getPayRate) {
-        this.getPayRate = getPayRate;
+    public double getHoursWorked() {
+        return hoursWorked;
+    }
+
+    public void punchIn(double time) {
+        startTime = time;
+    }
+
+    public void punchOut(double time) {
+        double duration = time - startTime;
+        hoursWorked += duration;
+        startTime = 0;
+    }
+
+    public void punchIn() {
+        LocalDateTime now = LocalDateTime.now();
+        int hour = now.getHour();
+        int minute = now.getMinute();
+        double time = hour + (minute / 60.0);
+        startTime = time;
+    }
+
+    public void punchOut() {
+        LocalDateTime now = LocalDateTime.now();
+        int hour = now.getHour();
+        int minute = now.getMinute();
+        double time = hour + (minute / 60.0);
+        double duration = time - startTime;
+        hoursWorked += duration;
+        startTime = 0;
+    }
+
+    public void punchTimeCard(double time) {
+        if (startTime == 0) {
+            startTime = time;
+        } else {
+            double duration = time - startTime;
+            hoursWorked += duration;
+            startTime = 0;
+        }
     }
 
     public double getTotalPay() {
-        return getTotalPay;
+        if (hoursWorked <= 40) {
+            return hoursWorked * payRate;
+        } else {
+            return (40 * payRate) + ((hoursWorked - 40) * (payRate * 1.5));
+        }
     }
 
-    public void setGetTotalPay(int getTotalPay) {
-        this.getTotalPay = getTotalPay;
+    public double getRegularHours() {
+        if (hoursWorked <= 40) {
+            return hoursWorked;
+        } else {
+            return 40;
+        }
     }
 
-    public int getRegularHours() {
-        return getRegularHours;
+    public double getOvertimeHours() {
+        if (hoursWorked > 40) {
+            return hoursWorked - 40;
+        } else {
+            return 0;
+        }
     }
 
-    public void setGetRegularHours(int getRegularHours) {
-        this.getRegularHours = getRegularHours;
-    }
 
-    public int getOvertimeHours() {
-        return OvertimeHours;
-    }
-
-    public void setOvertimeHours(int overtimeHours) {
-        OvertimeHours = overtimeHours;
-    }
 }

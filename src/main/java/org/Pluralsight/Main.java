@@ -3,32 +3,23 @@ package org.Pluralsight;
 public class Main {
     public static void main(String[] args) {
         // Test Employee class
-        Employee employee = new Employee(332443244, "Marc Surpris", 4, 26.07, 1070.60, 40, 20);
-        System.out.println("Employee ID: " + employee.getEmployeeId());
-        System.out.println("Employee Name: " + employee.getName());
-        System.out.println("Employee Department: " + employee.getDepartment());
-        System.out.println("Employee Pay Rate: " + employee.getPayRate());
-        System.out.println("Employee Hours Worked: " + employee.getTotalPay());
-        System.out.println("Employee Total Pay: " + employee.getTotalPay());
-        System.out.println("Employee Regular Hours: " + employee.getRegularHours());
-        System.out.println("Employee Overtime Hours: " + employee.getOvertimeHours());
-        System.out.println("=======================================================================");
+        Employee employee1 = new Employee(1, "Marc Surpris", "IT", 25.0);
+        employee1.punchIn(6.5);
+        employee1.punchOut(17.25);
+        System.out.println(employee1.getName() + " worked " + employee1.getHoursWorked() + " hours.");
+        System.out.println("Total pay for " + employee1.getName() + " is $" + employee1.getTotalPay());
 
-        // Test Reservation class
-        Reservation reservation = new Reservation("king", 300, 5, true, 1);
-        System.out.println("Room Type: " + reservation.getRoomType());
-        System.out.println("Price per Night: " + reservation.getPrice());
-        System.out.println("Number of Nights: " + reservation.getNumberOfNights());
-        System.out.println("Is Weekend: " + reservation.isWeekend());
-        System.out.println("Reservation Total: " + reservation.getReservationTotal());
-        System.out.println("=======================================================================");
+        // Test Hotel class
+        Hotel hotel1 = new Hotel("Holiday Inn", 10, 20);
+        System.out.println(hotel1.getName() + " has " + hotel1.getNumberOfSuites() + " suites and " + hotel1.getNumberOfRooms() + " rooms.");
+        System.out.println(hotel1.getAvailableSuites() + " suites and " + hotel1.getAvailableRooms() + " rooms are available.");
 
-        // Test Room class
-        Room room = new Room(3, 99.99, false, false, true);
-        System.out.println("Number of Beds: " + room.getNumberOfBeds());
-        System.out.println("Price: " + room.getPrice());
-        System.out.println("Is Occupied: " + room.isOccupied());
-        System.out.println("Is Dirty: " + room.isDirty());
-        System.out.println("Is Available: " + room.isAvailable());
+        boolean booked = hotel1.bookRoom(2, true);
+        if (booked) {
+            System.out.println("Booked 2 suites.");
+        } else {
+            System.out.println("Could not book 2 suites.");
+        }
+        System.out.println(hotel1.getAvailableSuites() + " suites and " + hotel1.getAvailableRooms() + " rooms are available.");
     }
 }

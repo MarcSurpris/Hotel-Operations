@@ -1,58 +1,52 @@
 package org.Pluralsight;
 
 public class Room {
-    // Attributes
-    private int getNumberOfBeds;
-    private double getPrice;
+    private int numberOfBeds;
+    private double price;
     private boolean isOccupied;
     private boolean isDirty;
-    private boolean isAvailable;
 
-    public Room(int getNumberOfBeds, double getPrice, boolean isOccupied, boolean isDirty, boolean isAvailable) {
-        this.getNumberOfBeds = getNumberOfBeds;
-        this.getPrice = getPrice;
-        this.isOccupied = isOccupied;
-        this.isDirty = isDirty;
-        this.isAvailable = isAvailable;
+    public Room(int numberOfBeds, double price) {
+        this.numberOfBeds = numberOfBeds;
+        this.price = price;
+        this.isOccupied = false;
+        this.isDirty = false;
     }
 
     public int getNumberOfBeds() {
-        return getNumberOfBeds;
-    }
-
-    public void setGetNumberOfBeds(int getNumberOfBeds) {
-        this.getNumberOfBeds = getNumberOfBeds;
+        return numberOfBeds;
     }
 
     public double getPrice() {
-        return getPrice;
-    }
-
-    public void setGetPrice(int getPrice) {
-        this.getPrice = getPrice;
+        return price;
     }
 
     public boolean isOccupied() {
         return isOccupied;
     }
 
-    public void setGetIsOccupied(boolean isOccupied) {
-        this.isOccupied = isOccupied;
-    }
-
     public boolean isDirty() {
         return isDirty;
     }
 
-    public void setIsDirty(boolean isDirty) {
-        this.isDirty = isDirty;
-    }
-
     public boolean isAvailable() {
-        return isAvailable;
+        return !isOccupied && !isDirty;
     }
 
-    public void setIsAvailable(boolean isAvailable) {
-        this.isAvailable = isAvailable;
+    public void checkIn() {
+        if (!isOccupied && !isDirty) {
+            isOccupied = true;
+            isDirty = true;
+        }
+    }
+
+    public void checkout() {
+        isOccupied = false;
+    }
+
+    public void cleanRoom() {
+        if (!isOccupied) {
+            isDirty = false;
+        }
     }
 }
